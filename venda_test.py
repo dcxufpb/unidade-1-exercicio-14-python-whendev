@@ -10,6 +10,13 @@ def verifica_item(mensagem_esperada, Venda, itm, pdt, qnt):
   the_exception = excinfo.value
   assert mensagem_esperada == str(the_exception)
 
+  
+def verifica_campo_obrigatorio_objeto(mensagem_esperada, Venda):
+    with pytest.raises(Exception) as excinfo:
+        Venda.imprime_cupom()
+    the_exception = excinfo.value
+    assert mensagem_esperada == str(the_exception)
+
 
 # Todas as variaveis preenchidas
 
@@ -174,3 +181,13 @@ TEXTO_ESPERADO_CENARIO_4_VENDA_3 = "item não pode ser adicionado na venda com p
 
 def test_cenario4_venda3():
   verifica_item(TEXTO_ESPERADO_CENARIO_4_VENDA_3, cenario4_venda3, 2, produto4, 1)
+
+
+#Cenario 5
+
+cenario5_venda1 = LOJA_COMPLETA.vender(DATA_HORA_VENDA, CCF, COO)
+
+TEXTO_ESPERADO_CENARIO_5_VENDA_1 = "Você precisa inserir itens na sua venda"
+
+def test_cenario5_venda1():
+  verifica_campo_obrigatorio_objeto(TEXTO_ESPERADO_CENARIO_5_VENDA_1, cenario5_venda1)

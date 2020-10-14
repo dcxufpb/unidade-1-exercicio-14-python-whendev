@@ -131,7 +131,7 @@ class Venda:
     if not self.datahora:
       raise Exception("O campo data da venda é obrigatório")
 
-    if (self.itens.count == 0):
+    if not self.itens:
       raise Exception("Você precisa inserir itens na sua venda")
 
   def duplicado(self, produto, item):
